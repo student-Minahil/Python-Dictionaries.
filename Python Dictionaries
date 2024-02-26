@@ -1,0 +1,314 @@
+# Question no:-1
+sentence=input("enter a sentence:")
+
+print(sentence)
+
+words_list=sentence.spilt()
+
+word_count=0
+
+for word in words_list:
+    if word not in word_count:
+        word_count[word]=1
+else:
+    word_count[word]+=1
+
+for word,no_of_words in word_count.item():
+    print(f"{word}:{no_of_words}")
+
+    print(word_count)
+# Question no:-2
+scors=[]
+
+for i in range (5):
+    marks=int(input("enter a marks:"))
+    scors.append(marks)
+
+grading_scale={
+    'A+':90,
+    'A':80,
+    'B':70,
+}
+
+perc = (sum(scors)/len(scors))*100
+
+print(grading_scale[perc])
+# Question no:-3
+def add_item(shopping_list, item):
+    if item in shopping_list:
+        print(f"{item} is already in the list")
+    else:
+        shopping_list[item] = False
+
+def remove(shopping_list, item):
+    if item in shopping_list:
+        del shopping_list[item]
+    else:
+        print(f"{item} is not in the list")
+
+def check_off(shopping_list, item):
+    if item in shopping_list:
+        shopping_list[item] = True
+    else:
+        print(f"{item} is not in the list")
+
+
+shopping_list = {}
+
+while True:
+    print("Options: ")
+    print("1. Add Item: ")
+    print("2. Remove Item: ")
+    print("3. Check Item: ")
+    print("4. View Items: ")
+
+    comnd = int(input("Select option: "))
+    if comnd == 1:
+        item = input("ENter a item for add: ")
+        add_item(shopping_list, item)
+    elif comnd == 2:
+        item = input("ENter a item for remove: ")
+        remove(shopping_list, item)
+    elif comnd == 3:
+        item = input("Enter item for check off: ")
+        check_off(shopping_list, item)
+    elif comnd == 4:
+        for item, value in shopping_list.items():
+            print(f"{item}: {value}")
+# Question no:-4
+def main():
+    movie_ratings = {} 
+    
+    while True:
+        print("\n1. Rate a movie")
+        print("2. View average ratings")
+        print("3. Exit")
+        
+        choice = input("Enter your choice: ")
+        
+        if choice == '1':
+            rate_movie(movie_ratings)
+        elif choice == '2':
+            view_ratings(movie_ratings)
+        elif choice == '3':
+            print("Exiting...")
+            break
+        else:
+            print("Invalid choice. Please enter a valid option.")
+
+def rate_movie(movie_ratings):
+    movie_title = input("Enter the title of the movie: ")
+    rating = int(input("Rate the movie from 1 to 5: "))
+    
+    if movie_title in movie_ratings:
+        movie_ratings[movie_title].append(rating)
+    else:
+        movie_ratings[movie_title] = [rating]
+    
+    print("Thank you for rating the movie.")
+
+def view_ratings(movie_ratings):
+    if not movie_ratings:
+        print("No ratings available yet.")
+        return
+    
+    print("\nMovie Ratings:")
+    for movie_title, ratings in movie_ratings.items():
+        average_rating = sum(ratings) / len(ratings)
+        print(f"{movie_title}: Average Rating - {average_rating:.2f}")
+
+if __name__ == "__main__":
+    main()
+# Question no:- 5
+def main():
+    conversion_factors = {'C_to_F': lambda c: c * 9 / 5 + 32,
+                          'F_to_C': lambda f: (f - 32) * 5 / 9}
+
+    while True:
+        print("\n1. Convert Celsius to Fahrenheit")
+        print("2. Convert Fahrenheit to Celsius")
+        print("3. Exit")
+        
+        choice = input("Enter your choice: ")
+        
+        if choice == '1':
+            celsius = float(input("Enter temperature in Celsius: "))
+            converted_temp = convert_temperature(celsius, conversion_factors['C_to_F'])
+            print(f"{celsius}°C is equal to {converted_temp:.2f}°F")
+        elif choice == '2':
+            fahrenheit = float(input("Enter temperature in Fahrenheit: "))
+            converted_temp = convert_temperature(fahrenheit, conversion_factors['F_to_C'])
+            print(f"{fahrenheit}°F is equal to {converted_temp:.2f}°C")
+        elif choice == '3':
+            print("Exiting...")
+            break
+        else:
+            print("Invalid choice. Please enter a valid option.")
+
+def convert_temperature(temperature, conversion_function):
+    return conversion_function(temperature)
+
+if __name__ == "__main__":
+    main()
+# Question no :-6
+def main():
+    contacts = {}
+
+    while True:
+        print("\n1. Add contact")
+        print("2. Search contact")
+        print("3. Update contact")
+        print("4. Exit")
+        
+        choice = input("Enter your choice: ")
+        
+        if choice == '1':
+            add_contact(contacts)
+        elif choice == '2':
+            search_contact(contacts)
+        elif choice == '3':
+            update_contact(contacts)
+        elif choice == '4':
+            print("Exiting...")
+            break
+        else:
+            print("Invalid choice. Please enter a valid option.")
+
+def add_contact(contacts):
+    name = input("Enter contact name: ")
+    number = input("Enter contact number: ")
+    contacts[name] = number
+    print(f"{name} added to contacts.")
+
+def search_contact(contacts):
+    name = input("Enter contact name to search: ")
+    if name in contacts:
+        print(f"Contact found: {name} - {contacts[name]}")
+    else:
+        print(f"Contact '{name}' not found.")
+
+def update_contact(contacts):
+    name = input("Enter contact name to update: ")
+    if name in contacts:
+        new_number = input("Enter new contact number: ")
+        contacts[name] = new_number
+        print(f"Contact '{name}' updated.")
+    else:
+        print(f"Contact '{name}' not found.")
+
+if __name__ == "__main__":
+    main()
+# Question no:-8
+import random
+import string
+
+def generate_password(password_length, options):
+    characters = ''
+    if options['lowercase']:
+        characters += string.ascii_lowercase
+    if options['uppercase']:
+        characters += string.ascii_uppercase
+    if options['numbers']:
+        characters += string.digits
+    if options['symbols']:
+        characters += string.punctuation
+
+    if not characters:
+        print("Error: No character options selected.")
+        return None
+
+    generated_password = ''.join(random.choice(characters) for _ in range(password_length))
+    return generated_password
+
+def main():
+    options = {
+        'lowercase': True,
+        'uppercase': True,
+        'numbers': True,
+        'symbols': True
+    }
+
+    password_length = int(input("Enter password length: "))
+    password = generate_password(password_length, options)
+    
+    if password:
+        print("Generated Password:", password)
+
+if __name__ == "__main__":
+    main()
+# Question no:-9
+song_organizer={"song1":{"artist":"atif",
+                          "genre":"happy"},
+                "song2":{"artist":"arsalan",
+                          "genre":"sad"},
+                 "song3":{"artist":"haseeb",
+                           "genre":"rape"},
+                  "song4":{"artist":"abrar",
+                           "genre":"melody"}}
+
+songs_list = [(title, details) for title, details in song_organizer.items()]
+
+
+# Define sorting functions
+def sort_by_title(song):
+    return song[0]  # Sort by song title
+
+def sort_by_artist(song):
+    return song[1]['artist']  # Sort by artist name
+
+def sort_by_genre(song):
+    return song[1]['genre']  # Sort by genre
+sorted_by_title = sorted(songs_list, key=sort_by_title)
+sorted_by_artist = sorted(songs_list, key=sort_by_artist)
+sorted_by_genre = sorted(songs_list, key=sort_by_genre)
+
+print("Sorted by Title:", sorted_by_title)
+print("Sorted by Artist:", sorted_by_artist)
+print("Sorted by Genre:", sorted_by_genre)
+# Question no 10
+def main():
+    expenses = {}
+
+    while True:
+        print("\n1. Add an expense")
+        print("2. View expenses by category")
+        print("3. View total expenses")
+        print("4. Exit")
+        
+        choice = input("Enter your choice: ")
+        
+        if choice == '1':
+            add_expense(expenses)
+        elif choice == '2':
+            view_expenses_by_category(expenses)
+        elif choice == '3':
+            view_total_expenses(expenses)
+        elif choice == '4':
+            print("Exiting...")
+            break
+        else:
+            print("Invalid choice. Please enter a valid option.")
+
+def add_expense(expenses):
+    category = input("Enter the category of expense: ")
+    amount = float(input("Enter the amount spent: "))
+    
+    expenses.setdefault(category, 0)
+    expenses[category] += amount
+    print("Expense added successfully.")
+
+def view_expenses_by_category(expenses):
+    if not expenses:
+        print("No expenses added yet.")
+        return
+    
+    print("\nExpenses by Category:")
+    for category, amount in expenses.items():
+        print(f"{category}: ${amount:.2f}")
+
+def view_total_expenses(expenses):
+    total_expenses = sum(expenses.values())
+    print(f"\nTotal Expenses: ${total_expenses:.2f}")
+
+if __name__ == "__main__":
+    main()
